@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components"
 import Header from "./Header"
 import Meta from "./Meta"
@@ -41,9 +41,11 @@ const Page = (props) => {
   const { user } = useAuth()
   const router = useRouter()
 
-  if (!user && router.pathname !== "/") {
-    router.replace("/")
-  }
+  useEffect(() => {
+    if (!user && router.pathname !== "/") {
+      router.replace("/")
+    }
+  }, [])
 
   return (
     <ThemeProvider theme={Theme}>
